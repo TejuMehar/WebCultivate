@@ -790,7 +790,7 @@ features
 }
 
 .features-small-item .icon i {
-  font-size: 18px;
+  font-size: 28px;
   color: #fff;
 }
 
@@ -812,6 +812,9 @@ features
   line-height: 25px;
   position: relative;
   z-index: 2;
+
+  text-align: justify;
+text-align-last: left;
 }
 
 .features-small-item a {
@@ -1360,51 +1363,86 @@ contact
 --------------------------------------------- 
 */
 
-#contact-us {
-  padding: 160px 0px;
+
+
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#contact-us h5 {
-  font-weight: 500;
-  font-size: 18px;
-  color: #1e1e1e;
-  letter-spacing: 0.25px;
-  line-height: 26px;
+/* Container for form */
+.contact-form {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+  animation: fadeInUp 0.8s ease-in-out;
 }
 
-.contact-text {
-  font-weight: 400;
-  font-size: 14px;
-  color: #6F8BA4;
-  letter-spacing: 0.6px;
-  line-height: 26px;
-}
-
-.contact-text p {
-  margin-bottom: 28px;
-}
-
+/* Form field styling */
 .contact-form input,
 .contact-form textarea {
-  color: #777;
-  font-size: 14px;
-  border: 1px solid #eee;
   width: 100%;
-  height: 50px;
-  outline: none;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 25px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin-bottom: 30px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  font-size: 16px;
+  background-color: #f9f9f9;
 }
 
-.contact-form textarea {
-  height: 150px;
-  resize: none;
-  padding: 20px;
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #4A90E2;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+}
+
+/* Button styling */
+.contact-form .main-button {
+  width: 100%;
+  padding: 14px;
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.contact-form .main-button:hover {
+  background-color: #357ABD;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive layout (optional, to ensure 100% width even in grid columns) */
+.col-lg-6,
+.col-lg-12,
+.col-md-12,
+.col-sm-12 {
+  width: 100%;
 }
 
 /* 
