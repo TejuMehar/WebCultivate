@@ -1110,7 +1110,7 @@ parallax & home seperator
 team
 --------------------------------------------- 
 /* TEAM SECTION */
-.blog-post-thumb {
+.blog-post-thumb1 {
   background: #fff;
   box-shadow: 0 2px 48px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -1119,21 +1119,28 @@ team
   padding: 25px 20px;
   text-align: center;
   transition: transform 0.3s ease;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.blog-post-thumb:hover {
+.blog-post-thumb1:hover {
   transform: translateY(-10px);
 }
 
-.blog-post-thumb .img {
-  width: 120px;
-  height: 120px;
+.blog-post-thumb1 .img {
+  width: 200px;
+  height: 200px;
   margin: 0 auto 20px auto;
   border-radius: 50%;
   overflow: hidden;
+  border: 1px solid #000000; /* Add border to the image container */
 }
 
-.blog-post-thumb .img img {
+.blog-post-thumb1 .img img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* ensures full coverage without distortion */
@@ -1141,30 +1148,30 @@ team
   border-radius: 20%; /* Make the image itself circular */
 }
 
-.blog-post-thumb h3 {
+.blog-post-thumb1 h3 {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #1e1e1e;
 }
 
-.blog-post-thumb .text {
+.blog-post-thumb1 .text {
   font-size: 15px;
   color: #777;
 }
 
-.blog-post-thumb .social {
+.blog-post-thumb1 .social {
   margin-top: 10px;
 }
 
-.blog-post-thumb .social a {
+.blog-post-thumb1 .social a {
   color: #4E47DE;
   font-size: 18px;
   margin: 0 8px;
   transition: color 0.3s ease;
 }
 
-.blog-post-thumb .social a:hover {
+.blog-post-thumb1 .social a:hover {
   color: #ff589e;
 }
 
