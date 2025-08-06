@@ -1455,6 +1455,28 @@ footer {
   padding-top: 30px;
 }
 
+footer .container .footer-links{
+  /* background-color: red; */
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.Address, .Services, .Information{
+  /* background-color: #fff; */
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.Address a, .Services a, .Information a{
+  /* text-decoration: none; */
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 14px;
+}
+
+
 footer .social {
   overflow: hidden;
   margin-top: 10px;
