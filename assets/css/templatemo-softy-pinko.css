@@ -27,7 +27,8 @@ Table of contents
 font & reset css
 --------------------------------------------- 
 */
-@import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
+/* @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900"); */
+/* Using Times New Roman instead of Raleway */
 /* 
 ---------------------------------------------
 reset
@@ -79,7 +80,8 @@ header, nav, section, article, aside, footer, hgroup {
 }
 
 html, body {
-  font-family: "Raleway", sans-serif;
+   /* font-family: "Raleway", sans-serif; */
+  font-family: "Times New Roman", Times, serif;
   font-weight: 400;
   background-color: #fff;
   font-size: 16px;
@@ -109,7 +111,7 @@ global styles
 html,
 body {
   background: #fff;
-  font-family: "Raleway", sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 ::selection {
@@ -1370,7 +1372,7 @@ contact
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 /* Container for form */
