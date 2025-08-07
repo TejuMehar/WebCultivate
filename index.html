@@ -869,21 +869,21 @@ https://templatemo.com/tm-535-softy-pinko
                 // Add scroll direction class to body
                 $('body').removeClass('scroll-up scroll-down').addClass('scroll-' + scrollDirection);
 
-                // Clear timeout and set scrolling state
+                // Clear timeout and set scrolling state - instant response
                 clearTimeout(scrollTimeout);
                 $('body').addClass('is-scrolling');
                 
                 scrollTimeout = setTimeout(function() {
                     $('body').removeClass('is-scrolling');
                     window.scrollSpeed = 0;
-                }, 150);
+                }, 20);
             });
 
             // Enhanced scroll to top with smooth easing and feedback
             $('.scroll-to-top').click(function(e) {
                 e.preventDefault();
                 
-                // Add click animation
+                // Add click animation - normal response for scroll-to-top
                 $(this).addClass('clicked');
                 setTimeout(() => $(this).removeClass('clicked'), 200);
                 
@@ -891,7 +891,7 @@ https://templatemo.com/tm-535-softy-pinko
                 $('html, body').animate({
                     scrollTop: 0
                 }, {
-                    duration: 1000,
+                    duration: 800,
                     easing: 'easeInOutCubic',
                     progress: function(animation, progress) {
                         // Update button appearance during scroll
@@ -905,30 +905,19 @@ https://templatemo.com/tm-535-softy-pinko
                 });
             });
 
-            // Enhanced smooth scrolling for navigation links with section highlighting
+            // Ultra-fast navigation scrolling for menu links
             $('a[href^="#"]').click(function(e) {
                 const target = $(this.getAttribute('href'));
                 if (target.length) {
                     e.preventDefault();
                     
-                    // Add ripple effect to clicked link
+                    // Add ripple effect to clicked link - minimal
                     const ripple = $('<span class="ripple"></span>');
                     $(this).append(ripple);
-                    setTimeout(() => ripple.remove(), 600);
+                    setTimeout(() => ripple.remove(), 50);
                     
-                    $('html, body').animate({
-                        scrollTop: target.offset().top - 100
-                    }, {
-                        duration: 1200,
-                        easing: 'easeInOutCubic',
-                        progress: function(animation, progress) {
-                            // Dynamic progress indicator during navigation
-                            const targetProgress = (target.offset().top / $(document).height()) * 100;
-                            $('.scroll-progress').css('width', 
-                                ((1 - progress) * ($(window).scrollTop() / ($(document).height() - $(window).height())) + 
-                                 progress * (targetProgress / 100)) * 100 + '%');
-                        }
-                    });
+                    // Instant scroll - no animation
+                    $(window).scrollTop(target.offset().top - 100);
                 }
             });
 
@@ -979,16 +968,16 @@ https://templatemo.com/tm-535-softy-pinko
             toggleScrollToTop();
             highlightCurrentSection();
 
-            // Add keyboard shortcuts for scrolling
+            // Add keyboard shortcuts for scrolling - instant
             $(document).keydown(function(e) {
                 switch(e.which) {
                     case 36: // Home key
                         e.preventDefault();
-                        $('html, body').animate({scrollTop: 0}, 800);
+                        $('html, body').animate({scrollTop: 0}, 50);
                         break;
                     case 35: // End key
                         e.preventDefault();
-                        $('html, body').animate({scrollTop: $(document).height()}, 800);
+                        $('html, body').animate({scrollTop: $(document).height()}, 50);
                         break;
                 }
             });
@@ -999,6 +988,14 @@ https://templatemo.com/tm-535-softy-pinko
             easeInOutCubic: function (x, t, b, c, d) {
                 if ((t/=d/2) < 1) return c/2*t*t*t + b;
                 return c/2*((t-=2)*t*t + 2) + b;
+            },
+            easeInOutQuart: function (x, t, b, c, d) {
+                if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+                return -c/2 * ((t-=2)*t*t*t - 2) + b;
+            },
+            easeInOutQuint: function (x, t, b, c, d) {
+                if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+                return c/2*((t-=2)*t*t*t*t + 2) + b;
             },
             easeOutBounce: function (x, t, b, c, d) {
                 if ((t/=d) < (1/2.75)) {
@@ -1044,7 +1041,7 @@ https://templatemo.com/tm-535-softy-pinko
                     border-radius: 50%;
                     background: rgba(79, 172, 254, 0.6);
                     transform: scale(0);
-                    animation: rippleEffect 0.6s linear;
+                    animation: rippleEffect 0.05s linear;
                     pointer-events: none;
                 }
                 
@@ -1066,7 +1063,7 @@ https://templatemo.com/tm-535-softy-pinko
                 }
                 
                 body.is-scrolling ::-webkit-scrollbar-thumb {
-                    animation: scrollingPulse 0.3s ease-out !important;
+                    animation: scrollingPulse 0.2s ease-out !important;
                 }
                 
                 @keyframes scrollingPulse {
