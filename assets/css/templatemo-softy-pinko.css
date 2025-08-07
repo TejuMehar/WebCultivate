@@ -447,6 +447,7 @@ header
   line-height: 40px;
   border: transparent;
   letter-spacing: 1px;
+    font-size: 16px !important; 
 }
 
 .header-area .main-nav .nav li a:hover {
@@ -605,6 +606,7 @@ header
     -o-transition: all 0s ease 0s;
     transition: all 0s ease 0s;
     margin-left: 0px;
+    
   }
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
@@ -615,17 +617,23 @@ header
     border-bottom: 1px solid #eee;
     padding-left: 0px !important;
     padding-right: 0px !important;
+    
   }
-  .header-area .main-nav .nav li a {
-    height: 50px !important;
-    line-height: 50px !important;
-    padding: 0px !important;
-    border: none !important;
-    background: #fff !important;
-    color: #3B566E !important;
-  }
+.header-area .main-nav .nav li a {
+  height: 50px !important;
+  line-height: 50px !important;
+  padding: 0px !important;
+  border: none !important;
+  background: #fff !important;
+  color: black !important;
+  font-weight: 500 !important;
+
+  /* 🔥 Add this line to increase text size */
+  font-size: 22px;  /* You can increase to 20px, 22px, etc. */
+}
   .header-area .main-nav .nav li a:hover {
     background: #eee !important;
+    
   }
 }
 
@@ -663,7 +671,7 @@ welcome
 
 .welcome-area .header-text h1 {
   font-weight: 500;
-  font-size: 36px;
+  font-size: 39px;
   line-height: 54px;
   letter-spacing: 1.4px;
   margin-bottom: 30px;
@@ -1635,3 +1643,112 @@ preloader
     opacity: 0;
   }
 }
+
+
+
+
+
+/* Base Styling for Testimonials */
+#testimonials {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#testimonials .section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#testimonials .center-text p {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.team-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.team-item:hover {
+  transform: translateY(-5px);
+}
+
+.team-content img {
+  width: 40px;
+  margin-bottom: 20px;
+}
+
+.team-content p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100px;
+}
+
+.user-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 20px auto 10px;
+  display: block;
+}
+
+.team-info {
+  text-align: center;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.team-info span {
+  font-size: 14px;
+  color: #888;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  #testimonials .col-lg-4 {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-content p {
+    font-size: 15px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  #testimonials .center-text p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-item {
+    padding: 20px;
+  }
+
+  .team-content p {
+    font-size: 14px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+}
+
