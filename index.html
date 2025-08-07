@@ -758,6 +758,14 @@ https://templatemo.com/tm-535-softy-pinko
         </div>
     </footer>
     
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 
@@ -773,6 +781,304 @@ https://templatemo.com/tm-535-softy-pinko
     
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
+
+    <!-- Dynamic Scrollbar Script -->
+    <script>
+        $(document).ready(function() {
+            // Enhanced Scroll Progress Bar with dynamic colors
+            function updateScrollProgress() {
+                const scrollTop = $(window).scrollTop();
+                const docHeight = $(document).height() - $(window).height();
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                $('.scroll-progress').css({
+                    'width': scrollPercent + '%',
+                    'background': getProgressGradient(scrollPercent)
+                });
+                
+                // Add dynamic glow effect based on scroll speed
+                if (window.scrollSpeed > 10) {
+                    $('.scroll-progress').addClass('fast-scroll');
+                } else {
+                    $('.scroll-progress').removeClass('fast-scroll');
+                }
+            }
+
+            // Dynamic gradient based on scroll position
+            function getProgressGradient(percent) {
+                if (percent < 25) {
+                    return 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)';
+                } else if (percent < 50) {
+                    return 'linear-gradient(90deg, #00f2fe 0%, #10d9a0 100%)';
+                } else if (percent < 75) {
+                    return 'linear-gradient(90deg, #10d9a0 0%, #0bb386 100%)';
+                } else {
+                    return 'linear-gradient(90deg, #0bb386 0%, #4facfe 100%)';
+                }
+            }
+
+            // Scroll speed detection
+            let lastScrollTop = 0;
+            let scrollDirection = 'down';
+            window.scrollSpeed = 0;
+
+            // Enhanced Scroll to Top Button with dynamic states
+            function toggleScrollToTop() {
+                const scrollTop = $(window).scrollTop();
+                const button = $('.scroll-to-top');
+                
+                if (scrollTop > 300) {
+                    button.addClass('visible');
+                    
+                    // Add different states based on scroll position
+                    if (scrollTop > $(document).height() * 0.5) {
+                        button.addClass('halfway');
+                    } else {
+                        button.removeClass('halfway');
+                    }
+                    
+                    if (scrollTop > $(document).height() * 0.8) {
+                        button.addClass('near-bottom');
+                    } else {
+                        button.removeClass('near-bottom');
+                    }
+                } else {
+                    button.removeClass('visible halfway near-bottom');
+                }
+            }
+
+            // Scroll event with throttling and enhancements
+            let isScrolling = false;
+            let scrollTimeout;
+            
+            $(window).scroll(function() {
+                const currentScrollTop = $(window).scrollTop();
+                window.scrollSpeed = Math.abs(currentScrollTop - lastScrollTop);
+                scrollDirection = currentScrollTop > lastScrollTop ? 'down' : 'up';
+                lastScrollTop = currentScrollTop;
+
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        updateScrollProgress();
+                        toggleScrollToTop();
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+
+                // Add scroll direction class to body
+                $('body').removeClass('scroll-up scroll-down').addClass('scroll-' + scrollDirection);
+
+                // Clear timeout and set scrolling state
+                clearTimeout(scrollTimeout);
+                $('body').addClass('is-scrolling');
+                
+                scrollTimeout = setTimeout(function() {
+                    $('body').removeClass('is-scrolling');
+                    window.scrollSpeed = 0;
+                }, 150);
+            });
+
+            // Enhanced scroll to top with smooth easing and feedback
+            $('.scroll-to-top').click(function(e) {
+                e.preventDefault();
+                
+                // Add click animation
+                $(this).addClass('clicked');
+                setTimeout(() => $(this).removeClass('clicked'), 200);
+                
+                // Smooth scroll to top with progress feedback
+                $('html, body').animate({
+                    scrollTop: 0
+                }, {
+                    duration: 1000,
+                    easing: 'easeInOutCubic',
+                    progress: function(animation, progress) {
+                        // Update button appearance during scroll
+                        const remaining = 1 - progress;
+                        $('.scroll-to-top').css('transform', 
+                            `translateY(-5px) scale(${1.1 + (remaining * 0.1)}) rotate(${progress * 360}deg)`);
+                    },
+                    complete: function() {
+                        $('.scroll-to-top').css('transform', '');
+                    }
+                });
+            });
+
+            // Enhanced smooth scrolling for navigation links with section highlighting
+            $('a[href^="#"]').click(function(e) {
+                const target = $(this.getAttribute('href'));
+                if (target.length) {
+                    e.preventDefault();
+                    
+                    // Add ripple effect to clicked link
+                    const ripple = $('<span class="ripple"></span>');
+                    $(this).append(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                    
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 100
+                    }, {
+                        duration: 1200,
+                        easing: 'easeInOutCubic',
+                        progress: function(animation, progress) {
+                            // Dynamic progress indicator during navigation
+                            const targetProgress = (target.offset().top / $(document).height()) * 100;
+                            $('.scroll-progress').css('width', 
+                                ((1 - progress) * ($(window).scrollTop() / ($(document).height() - $(window).height())) + 
+                                 progress * (targetProgress / 100)) * 100 + '%');
+                        }
+                    });
+                }
+            });
+
+            // Add scroll momentum detection
+            let momentum = 0;
+            let lastTime = Date.now();
+            
+            $(window).scroll(function() {
+                const currentTime = Date.now();
+                const deltaTime = currentTime - lastTime;
+                const deltaScroll = Math.abs($(window).scrollTop() - lastScrollTop);
+                
+                momentum = deltaScroll / deltaTime;
+                lastTime = currentTime;
+                
+                // Add momentum-based effects
+                if (momentum > 2) {
+                    $('body').addClass('high-momentum');
+                } else {
+                    $('body').removeClass('high-momentum');
+                }
+            });
+
+            // Scroll section highlighting
+            function highlightCurrentSection() {
+                const scrollTop = $(window).scrollTop() + 150;
+                
+                $('section[id], div[id]').each(function() {
+                    const section = $(this);
+                    const sectionTop = section.offset().top;
+                    const sectionBottom = sectionTop + section.outerHeight();
+                    
+                    if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+                        const sectionId = section.attr('id');
+                        $('a[href="#' + sectionId + '"]').addClass('current-section');
+                    } else {
+                        const sectionId = section.attr('id');
+                        $('a[href="#' + sectionId + '"]').removeClass('current-section');
+                    }
+                });
+            }
+
+            // Add section highlighting to scroll event
+            $(window).scroll(highlightCurrentSection);
+
+            // Initialize on page load
+            updateScrollProgress();
+            toggleScrollToTop();
+            highlightCurrentSection();
+
+            // Add keyboard shortcuts for scrolling
+            $(document).keydown(function(e) {
+                switch(e.which) {
+                    case 36: // Home key
+                        e.preventDefault();
+                        $('html, body').animate({scrollTop: 0}, 800);
+                        break;
+                    case 35: // End key
+                        e.preventDefault();
+                        $('html, body').animate({scrollTop: $(document).height()}, 800);
+                        break;
+                }
+            });
+        });
+
+        // Enhanced easing functions
+        $.extend($.easing, {
+            easeInOutCubic: function (x, t, b, c, d) {
+                if ((t/=d/2) < 1) return c/2*t*t*t + b;
+                return c/2*((t-=2)*t*t + 2) + b;
+            },
+            easeOutBounce: function (x, t, b, c, d) {
+                if ((t/=d) < (1/2.75)) {
+                    return c*(7.5625*t*t) + b;
+                } else if (t < (2/2.75)) {
+                    return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+                } else if (t < (2.5/2.75)) {
+                    return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+                } else {
+                    return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+                }
+            }
+        });
+
+        // Add CSS for dynamic states
+        const dynamicCSS = `
+            <style>
+                .scroll-progress.fast-scroll {
+                    box-shadow: 0 6px 30px rgba(79, 172, 254, 0.7) !important;
+                    height: 8px !important;
+                }
+                
+                .scroll-to-top.halfway {
+                    background: linear-gradient(135deg, #10d9a0 0%, #0bb386 50%, #4facfe 100%) !important;
+                }
+                
+                .scroll-to-top.near-bottom {
+                    background: linear-gradient(135deg, #0bb386 0%, #10d9a0 50%, #00f2fe 100%) !important;
+                    animation: nearBottomPulse 1s ease-in-out infinite !important;
+                }
+                
+                .scroll-to-top.clicked {
+                    transform: translateY(-5px) scale(0.9) !important;
+                }
+                
+                @keyframes nearBottomPulse {
+                    0%, 100% { transform: translateY(-5px) scale(1.1); }
+                    50% { transform: translateY(-8px) scale(1.2); }
+                }
+                
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(79, 172, 254, 0.6);
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s linear;
+                    pointer-events: none;
+                }
+                
+                @keyframes rippleEffect {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+                
+                .current-section {
+                    color: #4facfe !important;
+                    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5) !important;
+                }
+                
+                body.high-momentum .scroll-progress {
+                    box-shadow: 0 6px 40px rgba(79, 172, 254, 0.8) !important;
+                    filter: blur(0.5px) !important;
+                }
+                
+                body.is-scrolling ::-webkit-scrollbar-thumb {
+                    animation: scrollingPulse 0.3s ease-out !important;
+                }
+                
+                @keyframes scrollingPulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                    100% { transform: scale(1); }
+                }
+            </style>
+        `;
+        
+        $('head').append(dynamicCSS);
+    </script>
 
     <!-- Initialize Bootstrap Tooltips -->
     <script>
