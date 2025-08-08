@@ -2371,3 +2371,114 @@ preloader
     opacity: 0;
   }
 }
+
+/* Footer Social Media Styles */
+.footer-social {
+  margin-top: 30px;
+}
+
+.footer-social h4 {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.social-icon:hover::before {
+  transform: translateX(100%);
+}
+
+.social-icon i {
+  font-size: 18px;
+  z-index: 2;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.social-icon.facebook {
+  background: linear-gradient(135deg, #3b5998, #4267B2);
+}
+
+.social-icon.facebook i {
+  color: #ffffff;
+}
+
+.social-icon.facebook:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(59, 89, 152, 0.4);
+  border-color: #ffffff;
+}
+
+.social-icon.instagram {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+.social-icon.instagram i {
+  color: #ffffff;
+}
+
+.social-icon.instagram:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(131, 58, 180, 0.4);
+  border-color: #ffffff;
+}
+
+.social-icon.linkedin {
+  background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-icon.linkedin i {
+  color: #ffffff;
+}
+
+.social-icon.linkedin:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+  border-color: #ffffff;
+}
+
+/* Responsive Design for Social Icons */
+@media (max-width: 768px) {
+  .footer-social {
+    text-align: center;
+    margin-top: 25px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
