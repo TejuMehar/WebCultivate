@@ -916,7 +916,11 @@ welcome
   background-position: center center;
   background-size: cover; 
   height: 100vh;
+
+  /* Make background more visible */
+  filter: brightness(1.2) contrast(1.2);
 }
+
 
 .welcome-area .header-text {
   position: absolute;
